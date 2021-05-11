@@ -8,11 +8,7 @@ export default function InterviewerListItem(props) {
   const InterviewerItemClass = classnames("interviewers__item", {
     "interviewers__item--selected": selected,
   });
-  let liName = "";
-  if (selected) {
-    liName = name;
-  }
-
+  
   return (
     <li className={InterviewerItemClass} onClick={setInterviewer}>
       <img
@@ -21,7 +17,7 @@ export default function InterviewerListItem(props) {
         alt={name}
       />
       <span className={InterviewerItemClass}>
-        {liName}
+        {selected && name}
       </span>
     </li>
   );
