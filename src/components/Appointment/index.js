@@ -1,4 +1,5 @@
 import "components/Appointment/index";
+import "components/Appointment/styles.scss";
 import React from "react";
 var classnames = require('classnames/dedupe');
 
