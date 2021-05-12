@@ -1,6 +1,5 @@
-import "components/Appointment/Header";
 import React from "react";
-var classnames = require('classnames/dedupe');
+
 
 export default function Header(props) {
   let { time } = props;
