@@ -7,14 +7,14 @@ import "components/Appointment/styles.scss";
 var classnames = require('classnames/dedupe');
 
 export default function Appointment(props) {
-  let { time, interview, student, interviewer, onEdit, onDelete } = props;
-
+  let { time, student, interview, interviewer, onEdit, onDelete } = props;
   let content;
-  if (interviewer) {
-    content = <Show student={student} interviewer={interviewer} onEdit={onEdit} onDelete={onDelete} />
+
+  if (!interview) {
+    content = <Empty />
   }
   else {
-    content = <Empty />
+    content = <Show student={student} interviewer={interviewer} onEdit={onEdit} onDelete={onDelete} />
   }
 
   return (

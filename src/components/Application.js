@@ -21,14 +21,21 @@ export default function Application(props) {
       spots: 0,
     },
   ];
-  const appointments = [
-    {
-      id: 1,
-      time: "12pm",
-    },
+  const appointments = [{
+    id: 1,
+    time: "1pm",
+    interview: {
+      student: "Lydia Miller-Jones",
+      interviewer: {
+        id: 1,
+        name: "Joshua Jones",
+        avatar: "https://i.imgur.com/LpaY82x.png",
+      }
+    }
+  },
     {
       id: 2,
-      time: "1pm",
+      time: "2pm",
       interview: {
         student: "Lydia Miller-Jones",
         interviewer: {
@@ -73,12 +80,35 @@ export default function Application(props) {
           avatar: "https://i.imgur.com/LpaY82x.png",
         }
       }
+    },
+    {
+      id: 6,
+      key: "last",
+      time: "6pm"
     }
   ];
   const appointmentsElem = appointments.map((appointment) => {
-    return (
-      <Appointment key={appointment.id} id={appointment.id} time={appointment.time} interview={appointment.interview} />
-    )
+    console.log(appointment)
+    if (appointment.interview) {
+      return (
+        <Appointment
+          key={appointment.id}
+          id={appointment.id}
+          time={appointment.time}
+          interview={appointment.interview}
+          interviewer={appointment.interview.interviewer}
+        />
+      )
+    } else {
+      return (
+        < Appointment
+          key={appointment.id}
+          id={appointment.id}
+          time={
+            appointment.time}
+        />
+      )
+    }
   });
   return (
     <main className="layout">
@@ -104,7 +134,6 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {appointmentsElem}
-        <Appointment key="last" time="5pm" />
       </section>
     </main>
   );
