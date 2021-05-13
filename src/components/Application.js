@@ -48,14 +48,6 @@ export default function Application(props) {
     {
       id: 3,
       time: "3pm",
-      interview: {
-        student: "Jones Biden",
-        interviewer: {
-          id: 3,
-          name: "Demetris almer",
-          avatar: "https://i.imgur.com/LpaY82x.png",
-        }
-      }
     },
     {
       id: 4,
