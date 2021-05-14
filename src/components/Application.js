@@ -6,6 +6,9 @@ import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "../h
 const axios = require('axios');
 
 export default function Application(props) {
+
+
+
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -22,7 +25,6 @@ export default function Application(props) {
       const days = response[0].data;
       const appointments = response[1].data;
       const interviewers = response[2].data;
-      console.log(appointments)
       setState(prev => ({ ...prev, days, appointments, interviewers }));
     });
   }, []);
@@ -30,6 +32,20 @@ export default function Application(props) {
   const dayAppointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
   const appointmentList = dayAppointments.map((appointment) => {
+    function bookInterview(id, interview) {
+      const appointment = {
+        ...state.appointments[id],
+        interview: { ...interview }
+      };
+      const appointments = {
+        ...state.appointments,
+        [id]: appointment
+      };
+      setState({
+        ...state,
+        appointments
+      });
+    }
     const interview = getInterview(state, appointment.interview);
     return (
       <Appointment
@@ -38,6 +54,7 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         interviewers={interviewers}
+        bookInterview={bookInterview}
       />
     );
   });

@@ -1,6 +1,6 @@
 import "components/InterviewerListItem.scss";
 import React from "react";
-var classnames = require('classnames/dedupe');
+const classnames = require('classnames/dedupe');
 
 export default function InterviewerListItem(props) {
   let { id, name, avatar, selected, setInterviewer } = props;
@@ -8,17 +8,19 @@ export default function InterviewerListItem(props) {
   const InterviewerItemClass = classnames("interviewers__item", {
     "interviewers__item--selected": selected,
   });
-  
+
+  const imgItemClass = classnames("interviewers__item-image", {
+    "interviewers__item--selected-image": selected,
+  });
+
   return (
     <li className={InterviewerItemClass} onClick={setInterviewer}>
       <img
-        className="interviewers__item-image"
+        className={imgItemClass}
         src={avatar}
         alt={name}
       />
-      <span className={InterviewerItemClass}>
-        {selected && name}
-      </span>
+      {selected && name}
     </li>
   );
 }

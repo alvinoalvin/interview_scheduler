@@ -12,16 +12,25 @@ const CREATE = "CREATE"
 
 
 export default function Appointment(props) {
-  let { time, interview, onEdit, onDelete, interviewers } = props;
+  let { key, id, time, interview, onEdit, onDelete, interviewers, bookInterview } = props;
   let content;
 
   const { mode, transition, back } = useVisualMode(
     interview ? SHOW : EMPTY
   );
 
-
+  function save(name, interviewer) {
+    console.log("bloop");
+    const interview = {
+      student: name,
+      interviewer
+    };
+    bookInterview(id, interview).then(() => transition(EMPTY));
+  }
+  console.log("interviewObj: ", interview)
   return (
-    <article className="appointment">
+    <article className="appointment"
+    >
       <Header time={time} />
       { mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {
@@ -34,8 +43,10 @@ export default function Appointment(props) {
       }{
         mode === CREATE && (
           <Form
+            name={props.name}
+            value={props.value}
             interviewers={interviewers}
-            onSave
+            onSave={interview && save(interview.student.name, interview.interviewer)}
             onCancel={() => transition(EMPTY)}
           />
         )

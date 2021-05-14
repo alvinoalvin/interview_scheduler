@@ -14,15 +14,24 @@ export function getAppointmentsForDay(state, day) {
 }
 export function getInterviewersForDay(state, day) {
   const results = [];
-  const appointments = getAppointmentsForDay(state, day);
+  let interviewers = [];
 
-  if (appointments.length <= 0) {
-    return [];
+  for (const stateDay of state.days) {
+    if (stateDay.name === day) {
+      console.log("stateDay:", stateDay.name)
+      interviewers = stateDay.interviewers
+    }
   }
 
-  for (const appointment in appointments) {
-    if (appointments[appointment].interview) {
-      results.push(getInterview(state, appointments[appointment].interview).interviewer);
+  if (interviewers.length <= 0 || !day || !state) {
+    return [];
+  }
+  
+  for (const interviewer in state.interviewers) {
+    for (const dayInterviewer of interviewers) {
+      if (interviewer == dayInterviewer) {
+        results.push(state.interviewers[interviewer]);
+      }
     }
   }
 
