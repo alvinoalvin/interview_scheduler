@@ -12,7 +12,7 @@ const CREATE = "CREATE"
 
 
 export default function Appointment(props) {
-  let { time, interview, onEdit, onDelete } = props;
+  let { time, interview, onEdit, onDelete, interviewers } = props;
   let content;
 
   const { mode, transition, back } = useVisualMode(
@@ -34,7 +34,7 @@ export default function Appointment(props) {
       }{
         mode === CREATE && (
           <Form
-            interviewers={[]}
+            interviewers={interviewers}
             onSave
             onCancel={() => transition(EMPTY)}
           />
