@@ -26,7 +26,7 @@ export function getInterviewersForDay(state, day) {
   if (interviewers.length <= 0 || !day || !state) {
     return [];
   }
-  
+
   for (const interviewer in state.interviewers) {
     for (const dayInterviewer of interviewers) {
       if (interviewer == dayInterviewer) {
@@ -48,4 +48,12 @@ export function getInterview(state, interview) {
     }
   }
   return null;
+}
+
+export function getInterviewer(interviewers, interviewerID) {
+  for (let interviewer of interviewers) {
+    if (interviewer.id == interviewerID) {
+      return interviewer;
+    }
+  }
 }

@@ -6,13 +6,11 @@ import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "../h
 const axios = require('axios');
 
 export default function Application(props) {
-
-
-
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    appointments: []
+    appointments: [],
+    interviewers: []
   });
   const setDay = day => setState({ ...state, day });
 
@@ -31,8 +29,9 @@ export default function Application(props) {
 
   const dayAppointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
-  const appointmentList = dayAppointments.map((appointment) => {
-    function bookInterview(id, interview) {
+  const bookInterview = (id, interview) => {
+
+    return axios.put(`http://localhost:8001/api/appointments/${id}`, { interview }).then((response) => {
       const appointment = {
         ...state.appointments[id],
         interview: { ...interview }
@@ -45,16 +44,43 @@ export default function Application(props) {
         ...state,
         appointments
       });
-    }
+      console.log("bookInterview response: ", response)
+      return response
+    });
+  };
+  const cancelInterview = (id, interview) => {
+    console.log("cancelInterview ID: ", id)
+    console.log("cancelInterview interview: ", interview)
+
+    return axios.delete(`http://localhost:8001/api/appointments/${id}`).then((response) => {
+      const appointment = {
+        ...state.appointments[id],
+        interview: { ...interview }
+      };
+      const appointments = {
+        ...state.appointments,
+        [id]: appointment
+      };
+      setState({
+        ...state,
+        appointments
+      });
+      console.log("cancelInterview response: ", response)
+      return response
+    });
+  };
+  const appointmentList = dayAppointments.map((appointment) => {
+    console.log("applicationInterviewers: ", appointment) //returning null? why? state not set sometimes?
     const interview = getInterview(state, appointment.interview);
+
     return (
       <Appointment
+        {...appointment}
         key={appointment.id}
-        id={appointment.id}
-        time={appointment.time}
         interview={interview}
         interviewers={interviewers}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
     );
   });

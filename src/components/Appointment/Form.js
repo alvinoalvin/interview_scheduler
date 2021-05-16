@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import "components/Appointment/styles.scss";
 import InterviewerList from "components/InterviewerList";
 import Button from "components/Button";
+import { getInterviewer } from "helpers/selectors";
 
 export default function Form(props) {
   let { interviewers, onSave, onCancel } = props;
@@ -17,7 +18,12 @@ export default function Form(props) {
     reset();
     onCancel();
   }
+  function formSave() {
+    // props.onSave(currentName, currentInterviewer);
 
+    // onSave(name, interviewer);
+    onSave(name, getInterviewer(interviewers, interviewer));
+  }
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
@@ -35,7 +41,7 @@ export default function Form(props) {
       <section className="appointment__card-right">
         <section className="appointment__actions">
           <Button danger onClick={cancel}>Cancel</Button>
-          <Button confirm onSubmit={event => event.preventDefault()} onClick={onSave}>Save</Button>
+          <Button confirm onSubmit={event => event.preventDefault()} onClick={formSave}>Save</Button>
         </section>
       </section>
     </main >
