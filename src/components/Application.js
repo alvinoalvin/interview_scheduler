@@ -33,56 +33,6 @@ export default function Application(props) {
     }
   );
 
-  // const dayAppointments = getAppointmentsForDay(state, state.day);
-  // const bookInterview = (id, interview) => {
-  //   return axios.put(`http://localhost:8001/api/appointments/${id}`, { interview }).then((response) => {
-  //     const appointment = {
-  //       ...state.appointments[id],
-  //       interview: { ...interview }
-  //     };
-  //     const appointments = {
-  //       ...state.appointments,
-  //       [id]: appointment
-  //     };
-  //     setState({
-  //       ...state,
-  //       appointments
-  //     });
-  //     return response
-  //   });
-  // };
-  // const cancelInterview = (id, interview) => {
-  //   return axios.delete(`http://localhost:8001/api/appointments/${id}`).then((response) => {
-  //     const appointment = {
-  //       ...state.appointments[id],
-  //       interview: { ...interview }
-  //     };
-  //     const appointments = {
-  //       ...state.appointments,
-  //       [id]: appointment
-  //     };
-  //     setState({
-  //       ...state,
-  //       appointments
-  //     });
-  //     return response
-  //   });
-  // };
-  // const appointmentList = dayAppointments.map((appointment) => {
-  //   const interview = getInterview(state, appointment.interview);
-
-  //   return (
-  //     <Appointment
-  //       {...appointment}
-  //       key={appointment.id}
-  //       interview={interview}
-  //       interviewers={interviewers}
-  //       bookInterview={bookInterview}
-  //       cancelInterview={cancelInterview}
-  //     />
-  //   );
-  // });
-
   return (
     <main className="layout">
       <section className="sidebar">
