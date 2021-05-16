@@ -42,12 +42,8 @@ export function getInterview(state, interview) {
   if (!interview) {
     return null;
   }
-  for (const interviewerId in state.interviewers) {
-    if (interviewerId == interview.interviewer) {
-      return { interviewer: state.interviewers[interviewerId], student: interview.student };
-    }
-  }
-  return null;
+  return { interviewer: state.interviewers[interview.interviewer], student: interview.student };
+
 }
 
 export function getInterviewer(interviewers, interviewerID) {

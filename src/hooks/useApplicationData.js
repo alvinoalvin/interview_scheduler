@@ -11,20 +11,21 @@ export default function useApplicationData(props) {
 
   const setDay = day => setState({ ...state, day });
 
+  useEffect(() => {
+    Promise.all([
+      axios.get("http://localhost:8001/api/days"),
+      axios.get("http://localhost:8001/api/appointments"),
+      axios.get("http://localhost:8001/api/interviewers"),
+    ]).then((response) => {
+      const days = response[0].data;
+      const appointments = response[1].data;
+      const interviewers = response[2].data;
+      setState(prev => ({ ...prev, days, appointments, interviewers }));
+    });
+  }, []);
+
   const bookInterview = (id, interview) => {
     return axios.put(`http://localhost:8001/api/appointments/${id}`, { interview }).then((response) => {
-      // const appointment = {
-      //   ...state.appointments[id],
-      //   interview: { ...interview }
-      // };
-      // const appointments = {
-      //   ...state.appointments,
-      //   [id]: appointment
-      // };
-      // setState({
-      //   ...state,
-      //   appointments
-      // });
       return response
     });
   };
