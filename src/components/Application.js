@@ -32,7 +32,7 @@ export default function Application(props) {
       );
     }
   );
-
+  
   return (
     <main className="layout">
       <section className="sidebar">
@@ -57,7 +57,7 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {appointmentList}
-        <Appointment key="last" time="5pm" bookInterview={bookInterview} cancelInterview={cancelInterview}/>
+        <Appointment key="last" time="5pm" bookInterview={bookInterview} cancelInterview={cancelInterview} />
       </section>
     </main>
   );

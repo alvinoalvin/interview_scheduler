@@ -45,7 +45,7 @@ export default function Appointment(props) {
       .then(() => transition(EMPTY))
       .catch(error => transition(ERROR_DELETE, true))
   }
-  
+
   return (
     <article className="appointment">
       <Header time={time} />
@@ -74,10 +74,18 @@ export default function Appointment(props) {
           onCancel={() => transition(SHOW)}
         />
       )}
-      {mode === SAVING && (<Status message="Saving" />)}
-      {mode === DELETING && (<Status message="Deleting" />)}
-      {mode === ERROR_SAVE && (<Error message="There was an error while creating appointment" onClose={back} />)}
-      {mode === ERROR_DELETE && (<Error message="There was an error while deleting appointment" onClose={back} />)}
+      {mode === SAVING && (
+        <Status message="Saving" />
+      )}
+      {mode === DELETING && (
+        <Status message="Deleting" />
+      )}
+      {mode === ERROR_SAVE && (
+        <Error message="There was an error while creating appointment" onClose={back} />
+      )}
+      {mode === ERROR_DELETE && (
+        <Error message="There was an error while deleting appointment" onClose={back} />
+      )}
     </article>
   );
 }
