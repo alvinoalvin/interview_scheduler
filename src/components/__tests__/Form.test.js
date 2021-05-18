@@ -42,10 +42,12 @@ describe("Form", () => {
     expect(onSave).not.toHaveBeenCalled();
   });
 
+
   it("can successfully save after trying to submit an empty student name", () => {
     const onSave = jest.fn();
+    const interviewer = 1;
     const { getByText, getByPlaceholderText, queryByText } = render(
-      <Form interviewers={interviewers} onSave={onSave} />
+      <Form interviewers={interviewers} onSave={onSave} interviewer={interviewer} />
     );
 
     fireEvent.click(getByText("Save"));
@@ -63,32 +65,33 @@ describe("Form", () => {
 
     expect(onSave).toHaveBeenCalledTimes(1);
     expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", getInterviewer(interviewers, interviewer));
+  });
 
-    it("calls onCancel and resets the input field", () => {
-      const onCancel = jest.fn();
-      const { getByText, getByPlaceholderText, queryByText } = render(
-        <Form
-          interviewers={interviewers}
-          name="Lydia Mill-Jones"
-          onSave={jest.fn()}
-          onCancel={onCancel}
-        />
-      );
+  it("calls onCancel and resets the input field", () => {
+    const onCancel = jest.fn();
+    const interviewer = 1;
+    const { getByText, getByPlaceholderText, queryByText } = render(
+      <Form
+        interviewers={interviewers}
+        name="Lydia Mill-Jones"
+        interviewer ={interviewer}
+        onSave={jest.fn()}
+        onCancel={onCancel}
+      />
+    );
 
-      fireEvent.click(getByText("Save"));
+    fireEvent.click(getByText("Save"));
 
-      fireEvent.change(getByPlaceholderText("Enter Student Name"), {
-        target: { value: "Lydia Miller-Jones" }
-      });
-
-      fireEvent.click(getByText("Cancel"));
-
-      expect(queryByText(/student name cannot be blank/i)).toBeNull();
-
-      expect(getByPlaceholderText("Enter Student Name")).toHaveValue("");
-
-      expect(onCancel).toHaveBeenCalledTimes(1);
+    fireEvent.change(getByPlaceholderText("Enter Student Name"), {
+      target: { value: "Lydia Miller-Jones" }
     });
 
+    fireEvent.click(getByText("Cancel"));
+
+    expect(queryByText(/student name cannot be blank/i)).toBeNull();
+
+    expect(getByPlaceholderText("Enter Student Name")).toHaveValue("");
+
+    expect(onCancel).toHaveBeenCalledTimes(1);
   });
 });
