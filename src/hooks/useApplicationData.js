@@ -33,7 +33,20 @@ export default function useApplicationData(props) {
 
   const bookInterview = (id, interview) => {
     return axios.put(`http://localhost:8001/api/appointments/${id}`, { interview }).then((response) => {
-      setState({ ...state, spots: state.spots - 1 })
+      const appointment = {
+        ...state.appointments[id],
+        interview: { ...interview }
+      };
+      const appointments = {
+        ...state.appointments,
+        [id]: appointment
+      };
+      setState({
+        ...state,
+        appointments,
+        spots: state.spots - 1
+      });
+      // setState({ ...state, spots: state.spots - 1, appointments })
       console.log("spot gone:( ", state.spots)
       return response
     });
