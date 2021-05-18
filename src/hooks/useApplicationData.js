@@ -14,9 +14,9 @@ export default function useApplicationData(props) {
 
   useEffect(() => {
     Promise.all([
-      axios.get("http://localhost:8001/api/days"),
-      axios.get("http://localhost:8001/api/appointments"),
-      axios.get("http://localhost:8001/api/interviewers"),
+      axios.get("/api/days"),
+      axios.get("/api/appointments"),
+      axios.get("/api/interviewers"),
     ]).then((response) => {
       const days = response[0].data;
       const appointments = response[1].data;
@@ -32,7 +32,7 @@ export default function useApplicationData(props) {
   }, []);
 
   const bookInterview = (id, interview) => {
-    return axios.put(`http://localhost:8001/api/appointments/${id}`, { interview }).then((response) => {
+    return axios.put(`/api/appointments/${id}`, { interview }).then((response) => {
       const appointment = {
         ...state.appointments[id],
         interview: { ...interview }
@@ -54,7 +54,7 @@ export default function useApplicationData(props) {
 
 
   const cancelInterview = (id) => {
-    return axios.delete(`http://localhost:8001/api/appointments/${id}`).then((response) => {
+    return axios.delete(`/api/appointments/${id}`).then((response) => {
       setState({ ...state, spots: state.spots + 1 })
       console.log("spot opened :) ", state.spots)
       return response
