@@ -61,11 +61,6 @@ export default function useApplicationData(props) {
     });
   };
 
-  // const updateSpots = (id) => {
-  //   return axios.delete(`http://localhost:8001/api/appointments/${id}`).then((response) => {
-  //     return response
-  //   });
-  // };
   return {
     state,
     setDay,

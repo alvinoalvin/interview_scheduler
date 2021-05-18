@@ -1,8 +1,7 @@
 import React from "react";
-
 import { render, cleanup, fireEvent } from "@testing-library/react";
-
 import Form from "components/Appointment/Form";
+import { getInterviewer } from "helpers/selectors";
 
 afterEach(cleanup);
 
@@ -45,14 +44,15 @@ describe("Form", () => {
 
   it("calls onSave function when the name is defined", () => {
     const onSave = jest.fn();
+    const interviewer = 1;
     const { getByText, queryByText } = render(
-      <Form interviewers={interviewers} onSave={onSave} name="Lydia Miller-Jones" />
+      <Form interviewers={interviewers} onSave={onSave} name="Lydia Miller-Jones" interviewer={interviewer} />
     );
-
     fireEvent.click(getByText("Save"));
+
     expect(queryByText(/student name cannot be blank/i)).toBeNull();
     expect(onSave).toHaveBeenCalledTimes(1);
-    expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", null);
+    expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", getInterviewer(interviewers, interviewer));
   });
 
 });

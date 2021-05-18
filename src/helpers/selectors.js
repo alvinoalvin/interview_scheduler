@@ -49,6 +49,10 @@ export function getInterview(state, interview) {
 }
 
 export function getInterviewer(interviewers, interviewerID) {
+  if (!interviewers || !interviewerID) {
+    return null;
+  }
+  
   for (let interviewer of interviewers) {
     if (interviewer.id == interviewerID) {
       return interviewer;
