@@ -18,12 +18,17 @@ export function getInterviewersForDay(state, day) {
 
   for (const stateDay of state.days) {
     if (stateDay.name === day) {
-      console.log("stateDay:", stateDay.name)
-      interviewers = stateDay.interviewers
+      if (getAppointmentsForDay(state, stateDay.name)) {
+        let appointments = getAppointmentsForDay(state, stateDay.name);
+        for (const appointment of appointments) {
+          if (appointment.interview) {
+            interviewers.push(appointment.interview.interviewer)
+          }
+        }
+      }
     }
   }
-
-  if (interviewers.length <= 0 || !day || !state) {
+  if (interviewers === undefined || interviewers.length <= 0 || !day || !state) {
     return [];
   }
 
