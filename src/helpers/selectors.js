@@ -12,20 +12,14 @@ export function getAppointmentsForDay(state, day) {
 
   return results;
 }
+
 export function getInterviewersForDay(state, day) {
   const results = [];
   let interviewers = [];
 
   for (const stateDay of state.days) {
     if (stateDay.name === day) {
-      if (getAppointmentsForDay(state, stateDay.name)) {
-        let appointments = getAppointmentsForDay(state, stateDay.name);
-        for (const appointment of appointments) {
-          if (appointment.interview) {
-            interviewers.push(appointment.interview.interviewer)
-          }
-        }
-      }
+      interviewers = stateDay.interviewers;
     }
   }
   if (interviewers === undefined || interviewers.length <= 0 || !day || !state) {
