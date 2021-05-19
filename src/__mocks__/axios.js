@@ -101,7 +101,7 @@ export default {
     return Promise.resolve({
       status: 204,
       statusText: "No Content",
-      data: interview
+      data: null
     });
   })
 };

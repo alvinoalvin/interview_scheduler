@@ -75,7 +75,6 @@ export default function useApplicationData(props) {
         // spots: state.spots - 1
       });
 
-      console.log("Spot Closed", state.spots)
 
       return response;
     });
@@ -100,7 +99,8 @@ export default function useApplicationData(props) {
         // spots: state.spots + 1
       });
 
-      console.log("Spot Opened", state.spots)
+      console.log(response);
+      
       return response
     })
   };
