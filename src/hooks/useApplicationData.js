@@ -34,7 +34,6 @@ export default function useApplicationData(props) {
     });
   }, []);
 
-  console.log(state)
   function getDayIDFromName(name, state) {
     for (const day of state.days) {
       if (day.name === name) {
@@ -98,8 +97,6 @@ export default function useApplicationData(props) {
         days: days,
         // spots: state.spots + 1
       });
-
-      console.log(response);
       
       return response
     })

@@ -7,6 +7,7 @@ function InterviewerList(props) {
   const interviewersList = props.interviewers.map((mapInterviewer) => {
     return (
       <InterviewerListItem
+        key={mapInterviewer.id}
         id={mapInterviewer.id}
         name={mapInterviewer.name}
         avatar={mapInterviewer.avatar}
