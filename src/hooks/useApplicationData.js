@@ -34,6 +34,7 @@ export default function useApplicationData(props) {
     });
   }, []);
 
+  console.log(state)
   function getDayIDFromName(name, state) {
     for (const day of state.days) {
       if (day.name === name) {
@@ -44,6 +45,19 @@ export default function useApplicationData(props) {
 
   const bookInterview = (id, interview) => {
     return axios.put(`/api/appointments/${id}`, { interview }).then((response) => {
+      const days = [
+        ...state.days
+      ];
+      if (!state.appointments[id].interview) {
+        const dayID = getDayIDFromName(state.day, state);
+        const day = {
+          ...state.days[dayID],
+          spots: state.days[dayID].spots - 1
+        };
+
+        days[dayID] = day
+      }
+
       const appointment = {
         ...state.appointments[id],
         interview: { ...interview }
@@ -53,16 +67,6 @@ export default function useApplicationData(props) {
         [id]: appointment
       };
 
-      const dayID = getDayIDFromName(state.day, state);
-      const day = {
-        ...state.days[dayID],
-        spots: state.days[dayID].spots - 1
-      };
-      const days = [
-        ...state.days
-      ];
-
-      days[dayID] = day
 
       setState({
         ...state,

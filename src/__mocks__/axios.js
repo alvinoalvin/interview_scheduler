@@ -54,7 +54,7 @@ const fixtures = {
 };
 const interview = {
   student: "Student Name",
-  interview:"Sylvia Palmer"
+  interview: "Sylvia Palmer"
 }
 export default {
   defaults: { baseURL: "http://localhost:8001" },
@@ -87,6 +87,16 @@ export default {
   }),
 
   put: jest.fn(() => {
+    /* Resolve appointments data */
+    return Promise.resolve({
+      status: 204,
+      statusText: "No Content",
+      data: interview
+    });
+  }),
+
+
+  delete: jest.fn(() => {
     /* Resolve appointments data */
     return Promise.resolve({
       status: 204,
