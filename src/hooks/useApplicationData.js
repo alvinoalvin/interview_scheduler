@@ -7,7 +7,7 @@ export default function useApplicationData(props) {
     days: [],
     appointments: {},
     interviewers: {},
-    spots: 0
+    // spots: 0
   });
 
   const setDay = day => setState({ ...state, day });
@@ -21,15 +21,26 @@ export default function useApplicationData(props) {
       const days = response[0].data;
       const appointments = response[1].data;
       const interviewers = response[2].data;
-      let spots = 0;
-      for (const appt in appointments) {
-        if (appointments[appt].interview === null) {
-          spots++;
-        }
-      }
-      setState(prev => ({ ...prev, days, appointments, interviewers, spots }));
+      // let spots = 0;
+      // for (const appt in appointments) {
+      //   if (appointments[appt].interview === null) {
+      //     spots++;
+      //   }
+      // }
+      // console.log("initial spots", spots)
+      // setState(prev => ({ ...prev, days, appointments, interviewers, spots }));
+      setState(prev => ({ ...prev, days, appointments, interviewers }));
+
     });
   }, []);
+
+  function getDayIDFromName(name, state) {
+    for (const day of state.days) {
+      if (day.name === name) {
+        return day.id - 1;
+      }
+    }
+  }
 
   const bookInterview = (id, interview) => {
     return axios.put(`/api/appointments/${id}`, { interview }).then((response) => {
@@ -41,25 +52,55 @@ export default function useApplicationData(props) {
         ...state.appointments,
         [id]: appointment
       };
+
+      const dayID = getDayIDFromName(state.day, state);
+      const day = {
+        ...state.days[dayID],
+        spots: state.days[dayID].spots - 1
+      };
+      const days = [
+        ...state.days
+      ];
+
+      days[dayID] = day
+
       setState({
         ...state,
-        appointments,
-        spots: state.spots - 1
+        appointments: appointments,
+        days: days,
+        // spots: state.spots - 1
       });
-      // setState({ ...state, spots: state.spots - 1, appointments })
-      console.log("spot gone:( ", state.spots)
-      return response
+
+      console.log("Spot Closed", state.spots)
+
+      return response;
     });
   };
-
 
   const cancelInterview = (id) => {
     return axios.delete(`/api/appointments/${id}`).then((response) => {
-      setState({ ...state, spots: state.spots + 1 })
-      console.log("spot opened :) ", state.spots)
+      const dayID = getDayIDFromName(state.day, state);
+      const day = {
+        ...state.days[dayID],
+        spots: state.days[dayID].spots + 1
+      };
+      const days = [
+        ...state.days
+      ];
+
+      days[dayID] = day
+
+      setState({
+        ...state,
+        days: days,
+        // spots: state.spots + 1
+      });
+
+      console.log("Spot Opened", state.spots)
       return response
-    });
+    })
   };
+
 
   return {
     state,

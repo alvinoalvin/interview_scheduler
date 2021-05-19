@@ -5,7 +5,7 @@ var classnames = require('classnames/dedupe');
 export default function DayListItem(props) {
 
   let formatSpots = (spots) => {
-    if (spots <= 0) {
+    if (spots <= 0 || spots === undefined) {
       return `no spots remaining`;
     }
     if (spots === 1) {
@@ -21,7 +21,7 @@ export default function DayListItem(props) {
     "day-list__item--full": !props.spots
   });
   return (
-    <li className={dayClass} onClick={() => props.setDay(props.name)}>
+    <li className={dayClass} data-testid="day" onClick={() => props.setDay(props.name)}>
       <h2 className="text--regular">{props.name}</h2>
       <h3 className="text--light">{formatSpots(props.spots)}</h3>
     </li>

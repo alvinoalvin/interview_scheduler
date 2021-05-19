@@ -52,7 +52,10 @@ const fixtures = {
     }
   }
 };
-
+const interview = {
+  student: "Student Name",
+  interview:"Sylvia Palmer"
+}
 export default {
   defaults: { baseURL: "http://localhost:8001" },
   get: jest.fn(url => {
@@ -76,10 +79,19 @@ export default {
     if (url === "/api/interviewers") {
       /* Resolve interviewers data */
       return Promise.resolve({
-        status: 200,
-        statusText: "OK",
+        status: 204,
+        statusText: "No Content",
         data: fixtures.interviewers
       });
     }
+  }),
+
+  put: jest.fn(() => {
+    /* Resolve appointments data */
+    return Promise.resolve({
+      status: 204,
+      statusText: "No Content",
+      data: interview
+    });
   })
 };
