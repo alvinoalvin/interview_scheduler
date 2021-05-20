@@ -3,7 +3,7 @@ import InterviewerListItem from "components/InterviewerListItem";
 import React from "react";
 import PropTypes from 'prop-types';
 
-function InterviewerList(props) {
+export default function InterviewerList(props) {
   const interviewersList = props.interviewers.map((mapInterviewer) => {
     return (
       <InterviewerListItem
@@ -13,8 +13,8 @@ function InterviewerList(props) {
         avatar={mapInterviewer.avatar}
         selected={mapInterviewer.id === props.value}
         setInterviewer={(event) => props.onChange(mapInterviewer.id)}
-      />)
-  })
+      />);
+  });
 
   return (
     <section className="interviewers" >
@@ -30,4 +30,4 @@ function InterviewerList(props) {
 InterviewerList.propTypes = {
   interviewers: PropTypes.array.isRequired
 };
-export default InterviewerList
+// export default InterviewerList;

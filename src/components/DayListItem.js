@@ -1,6 +1,6 @@
 import "components/DayListItem.scss";
 import React from "react";
-var classnames = require('classnames/dedupe');
+let classnames = require('classnames/dedupe');
 
 export default function DayListItem(props) {
 
@@ -14,7 +14,7 @@ export default function DayListItem(props) {
 
     return `${spots} spots remaining`;
 
-  }
+  };
   const dayClass = classnames("day-list__item ", {
     "day-list__item--selected": props.selected,
     "day-list__item--full": !props.spots

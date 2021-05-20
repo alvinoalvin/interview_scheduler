@@ -3,7 +3,7 @@ import React from "react";
 const classnames = require('classnames/dedupe');
 
 export default function InterviewerListItem(props) {
-  let { id, name, avatar, selected, setInterviewer } = props;
+  let { name, avatar, selected, setInterviewer } = props;
 
   const InterviewerItemClass = classnames("interviewers__item", {
     "interviewers__item--selected": selected,
