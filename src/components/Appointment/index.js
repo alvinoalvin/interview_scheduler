@@ -64,14 +64,15 @@ export default function Appointment(props) {
           value={value}
           interviewers={interviewers}
           onSave={save}
-          onCancel={() => transition(EMPTY)}
+          onCancel={back}
         />
       )}
+      
       {mode === CONFIRM && (
         <Confirm
           message="Are you sure you'd like to delete?"
           onConfirm={() => remove(id)}
-          onCancel={() => transition(SHOW)}
+          onCancel={() => back}
         />
       )}
       {mode === SAVING && (
