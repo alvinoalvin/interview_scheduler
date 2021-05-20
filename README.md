@@ -6,6 +6,8 @@ Scheduler is a simple app designed for HR to keep track of interviews! The app a
 
 The site predominantly uses the technologies, React, to allow for quick and snappy execution while allowing for highly readable code!
 
+Before you start you'll need to also download the [api](https://github.com/alvinoalvin/scheduler-api)
+
 ## Dependencies
 
 - @testing-library/react-hooks
