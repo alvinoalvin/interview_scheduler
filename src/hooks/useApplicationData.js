@@ -7,7 +7,6 @@ export default function useApplicationData(props) {
     days: [],
     appointments: {},
     interviewers: {},
-    // spots: 0
   });
 
   const setDay = day => setState({ ...state, day });
@@ -21,14 +20,6 @@ export default function useApplicationData(props) {
       const days = response[0].data;
       const appointments = response[1].data;
       const interviewers = response[2].data;
-      // let spots = 0;
-      // for (const appt in appointments) {
-      //   if (appointments[appt].interview === null) {
-      //     spots++;
-      //   }
-      // }
-      // console.log("initial spots", spots)
-      // setState(prev => ({ ...prev, days, appointments, interviewers, spots }));
       setState(prev => ({ ...prev, days, appointments, interviewers }));
 
     });
@@ -44,7 +35,6 @@ export default function useApplicationData(props) {
 
   const bookInterview = (id, interview) => {
     return axios.put(`/api/appointments/${id}`, { interview }).then((response) => {
-      console.log(state)
       const days = [
         ...state.days
       ];
@@ -71,8 +61,7 @@ export default function useApplicationData(props) {
       setState({
         ...state,
         appointments: appointments,
-        days: days,
-        // spots: state.spots - 1
+        days: days
       });
 
 
@@ -105,8 +94,7 @@ export default function useApplicationData(props) {
       setState({
         ...state,
         days: days,
-        appointments,
-        // spots: state.spots + 1
+        appointments
       });
       
       return response
