@@ -19,31 +19,6 @@ Before you start you'll need to also download the [api](https://github.com/alvin
 - Run the development web server using the `npm start` command.
 - Run the development api server using the `npm start` command.
 
-
-## Dependencies
-
-- @testing-library/react-hooks
-- axios
-- classnames
-- normalize.css
-- react
-- react-dom
-- react-scripts
-
-## devDependencies
-
-- @babel/core
-- @storybook/addon-actions
-- @storybook/addon-backgrounds
-- @storybook/addon-links
-- @storybook/addons
-- @storybook/react
-- @testing-library/jest-dom
-- @testing-library/react
-- babel-loader
-- node-sass
-- prop-types
-
 ## User Guide
 ### Creating an appointment 
 Click the + icon to get to the create form.
@@ -74,4 +49,30 @@ Click the pen and paper icon to get to the create form.
 
 Repeat the steps from the Creating an Appointment section
 !["EditForm"](imgs_readme/EditForm.JPG)
+
+
+## Dependencies
+
+- @testing-library/react-hooks
+- axios
+- classnames
+- normalize.css
+- react
+- react-dom
+- react-scripts
+
+## devDependencies
+
+- @babel/core
+- @storybook/addon-actions
+- @storybook/addon-backgrounds
+- @storybook/addon-links
+- @storybook/addons
+- @storybook/react
+- @testing-library/jest-dom
+- @testing-library/react
+- babel-loader
+- node-sass
+- prop-types
+
 
